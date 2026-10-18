@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://c4bghbuk31hyl"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ts8mf"]
+[ext_resource type="Script" path="res://scripts/stateMachine/stateMachine.gd" id="2_8ohmt"]
+[ext_resource type="Script" path="res://scripts/player/stateMachine/states/ground.gd" id="3_wphhp"]
+[ext_resource type="Script" path="res://scripts/player/stateMachine/states/air.gd" id="4_q67fa"]
+[ext_resource type="Script" path="res://scenes/jetpacking.gd" id="5_07jey"]
+[ext_resource type="Script" path="res://scripts/player/jetpack.gd" id="5_afuaf"]
+[ext_resource type="Script" path="res://scripts/player/currentItem.gd" id="7_btp4a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dvc43"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yiit"]
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
+position = Vector2(336, 162)
+script = ExtResource("1_ts8mf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_dvc43")
+
+[node name="StateMachine" type="Node" parent="Player" node_paths=PackedStringArray("initial_state", "fallback_state")]
+script = ExtResource("2_8ohmt")
+initial_state = NodePath("ground")
+fallback_state = NodePath("ground")
+
+[node name="ground" type="Node" parent="Player/StateMachine" node_paths=PackedStringArray("air")]
+script = ExtResource("3_wphhp")
+air = NodePath("../air")
+
+[node name="air" type="Node" parent="Player/StateMachine" node_paths=PackedStringArray("ground", "jetpacking")]
+script = ExtResource("4_q67fa")
+ground = NodePath("../ground")
+jetpacking = NodePath("../jetpacking")
+
+[node name="jetpacking" type="Node" parent="Player/StateMachine" node_paths=PackedStringArray("air", "ground")]
+script = ExtResource("5_07jey")
+air = NodePath("../air")
+ground = NodePath("../ground")
+
+[node name="Jetpack" type="Node" parent="Player"]
+script = ExtResource("5_afuaf")
+
+[node name="CurrentItem" type="Node" parent="Player"]
+script = ExtResource("7_btp4a")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(506, 559)
+scale = Vector2(42.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_5yiit")
