@@ -7,11 +7,13 @@ extends PlayerState
 func process_physics(delta: float) -> State:
 	jetpack.useJetpack(delta)
 	
-	var direction: float = Input.get_axis("LEFT","RIGHT")
-	if direction:
-		player.velocity.x += player.ACCEL * delta * direction
+	if player.velocity.y < -300:
+		player.velocity.y = -300
+	
+	if player.direction:
+		player.velocity.x += player.ACCEL * delta * player.direction
 		if abs(player.velocity.x) > player.MAX_RUN_SPEED:
-			player.velocity.x = direction * player.MAX_RUN_SPEED
+			player.velocity.x = player.direction * player.MAX_RUN_SPEED
 	else:
 		player.velocity.x *= 0.5
 	
@@ -19,6 +21,7 @@ func process_physics(delta: float) -> State:
 		return air
 	
 	if player.is_on_floor():
-		return ground
+		player.velocity.y = player.JUMP_VELOCITY
+		return air
 	
 	return null

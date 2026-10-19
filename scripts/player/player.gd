@@ -1,20 +1,26 @@
 extends CharacterBody2D
+class_name Player
 
-const ACCEL: float = 1000.0
+const ACCEL: float = 1200.0
 const MAX_RUN_SPEED: float = 230.0
 const JUMP_VELOCITY: float = -350.0
 
-func _physics_process(_delta: float) -> void:
-	if velocity.y > 1000:
-		velocity.y = 1000
-	 
-	if velocity.y < -300:
-		velocity.y = -300
-	move_and_slide()
+@onready var flipGroup: Node2D = get_node("FlipGroup")
 
-func _input(event: InputEvent) -> void:
-	if event.is_action("SHOOT"):
-		if event.is_pressed() and !event.is_echo():
-			print("atirou")
-		if event.is_released():
-			print("soltou")
+var direction: float = 0
+var flipped: bool = false:
+	set(new_value):
+		if new_value == flipped:
+			return
+		flipped = new_value
+		flipGroup.scale.x = -1 if flipped else 1
+
+func _physics_process(_delta: float) -> void:
+	
+	direction = Input.get_axis("LEFT","RIGHT")
+	if direction == -1:
+		flipped = true
+	elif direction == 1:
+		flipped = false
+	
+	move_and_slide()

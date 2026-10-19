@@ -20,11 +20,10 @@ func process_physics(delta: float) -> State:
 	coyote_time -= delta
 	jetpack_cooldown -= delta
 	
-	var direction: float = Input.get_axis("LEFT","RIGHT")
-	if direction:
-		player.velocity.x += player.ACCEL * delta * direction
+	if player.direction:
+		player.velocity.x += player.ACCEL * delta * player.direction
 		if abs(player.velocity.x) > player.MAX_RUN_SPEED:
-			player.velocity.x = direction * player.MAX_RUN_SPEED
+			player.velocity.x = player.direction * player.MAX_RUN_SPEED
 	else:
 		player.velocity.x *= 0.9
 	
@@ -32,10 +31,9 @@ func process_physics(delta: float) -> State:
 		player.velocity.y += player.JUMP_VELOCITY * delta
 	
 	if Input.is_action_just_pressed("UP"):
-		if jetpack_cooldown <= 0:
-			return jetpacking
-		else:
-			jump_buffer = 0.1
+		jump_buffer = 0.1 
+		return jetpacking
+		
 	
 	if Input.is_action_just_released("UP"):
 		jump_timer = 0
@@ -45,6 +43,7 @@ func process_physics(delta: float) -> State:
 			player.velocity.y = player.JUMP_VELOCITY
 			return self
 		else:
+			animStateMachine.travel("landing")
 			return ground
 	
 	return null

@@ -1,13 +1,19 @@
-extends Node
+extends Node2D
+class_name CurrentItemManager
+
+@onready var player: Player = get_tree().get_first_node_in_group("Player")
+@onready var animationTree: AnimationTree = player.get_node("AnimationTree")
+@onready var animStateMachine: AnimationNodeStateMachinePlayback = animationTree.get("parameters/StateMachine/playback")
+const BLEND_PATH = "parameters/Blend2/blend_amount"
 
 @export var primaryWeapon: PrimaryWeapon
 @export var secondaryWeapon: SecondaryWeapon
 @export var throwableWeapon: ThrowableWeapon
 
-var currentWeaponIndex: int = 1
-var currentWeapon: Weapon = primaryWeapon
+@onready var currentWeapon: Weapon = secondaryWeapon
+var currentWeaponIndex: int = 2
 
-var shooting: bool = false
+var lastBlendAmount: int = 1
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ITEM_INDEX_DOWN"):
@@ -22,6 +28,20 @@ func _input(event: InputEvent) -> void:
 			currentWeaponIndex = 1
 		setCurrentWeapon()
 	
+	if !currentWeapon:
+		if lastBlendAmount != 0:
+			animationTree.set(BLEND_PATH, 0)
+		lastBlendAmount = 0
+		return
+	
+	currentWeapon.visible = true
+	
+	if lastBlendAmount != 1:
+		animationTree.set(BLEND_PATH, 1)
+	
+	lastBlendAmount = 1
+	
+	currentWeapon.flipped = player.flipped
 	
 	if event.is_action_pressed("SHOOT"):
 		currentWeapon.click()
@@ -29,6 +49,8 @@ func _input(event: InputEvent) -> void:
 		currentWeapon.releaseClick()
 
 func setCurrentWeapon():
+	if currentWeapon:
+		currentWeapon.visible = false
 	match currentWeaponIndex:
 		1:
 			currentWeapon = primaryWeapon

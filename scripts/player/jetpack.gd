@@ -4,7 +4,7 @@ extends Node
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 const JETPACK_REFUEL_RATE: float = 10.0
-const JETPACK_USE_RATE: float = 1.0
+const JETPACK_USE_RATE: float = 1.5
 var JETPACK_VELOCITY: float = -gravity
 
 
@@ -27,3 +27,4 @@ func _process(delta: float) -> void:
 	elif jetpackFuel < 100:
 		jetpackFuel += JETPACK_REFUEL_RATE * delta
 		jetpackFuel = min(jetpackFuel, 100)
+	#print(jetpackFuel)

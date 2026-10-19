@@ -1,8 +1,13 @@
-extends Node
+extends Node2D
 class_name Weapon
+
+var flipped: bool = false
 
 func click() -> void:
 	pass
 
-func realeseClick() -> void:
+func releaseClick() -> void:
+	pass
+
+func throw() -> void:
 	pass
