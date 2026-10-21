@@ -2,6 +2,7 @@ extends EnemyState
 
 @export_group("States")
 @export var patrol: EnemyState
+@export var attacking: EnemyState
 
 var idleTimer: float = 5
 
@@ -17,6 +18,11 @@ func process_frame(delta: float) -> State:
 
 func process_physics(delta: float) -> State:
 	enemy.velocity.y += gravity * delta
+	
+	if enemy.playerSeen:
+		return null
+		#return attacking
+	
 	return null
 
 func exit() -> void:

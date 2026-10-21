@@ -1,18 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://dog0hampy0y2q"]
+[gd_scene load_steps=10 format=3 uid="uid://dog0hampy0y2q"]
 
 [ext_resource type="Texture2D" uid="uid://dt5hn6ml5tmr3" path="res://assets/naziScum/naziScum1.png" id="1_ko4nx"]
 [ext_resource type="Script" path="res://scripts/enemies/nazi1.gd" id="1_yef0f"]
 [ext_resource type="Script" path="res://scripts/stateMachine/stateMachine.gd" id="3_jl7vl"]
+[ext_resource type="Script" path="res://scripts/enemies/currentItem.gd" id="3_uw0ts"]
 [ext_resource type="Script" path="res://scripts/enemies/stateMachine/patrol.gd" id="4_ib6mk"]
 [ext_resource type="Script" path="res://scripts/enemies/stateMachine/idle.gd" id="5_kv2gn"]
 [ext_resource type="Script" path="res://scripts/enemies/stateMachine/attacking.gd" id="6_akt4i"]
+[ext_resource type="Script" path="res://scripts/enemies/stateMachine/air.gd" id="7_4nisd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_41j88"]
 radius = 16.0
 height = 92.0
 
-[node name="Nazi1" type="CharacterBody2D"]
+[node name="Nazi1" type="CharacterBody2D" node_paths=PackedStringArray("flipGroup", "playerCheck")]
 script = ExtResource("1_yef0f")
+flipGroup = NodePath("FlipGroup")
+playerCheck = NodePath("FlipGroup/PlayerCheck")
 
 [node name="FlipGroup" type="Node2D" parent="."]
 
@@ -160,26 +164,44 @@ polygon = PackedVector2Array(-7, -23, -267, -49, -267, 42)
 [node name="FloorCheck" type="RayCast2D" parent="FlipGroup"]
 position = Vector2(-22, 39)
 target_position = Vector2(0, 13)
+collision_mask = 16
 
-[node name="CurrentItem" type="Node2D" parent="FlipGroup"]
+[node name="CurrentItem" type="Node2D" parent="FlipGroup" node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_uw0ts")
+enemy = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_41j88")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "fallback_state")]
 script = ExtResource("3_jl7vl")
 initial_state = NodePath("patrol")
+fallback_state = NodePath("idle")
 
-[node name="patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "enemy")]
+[node name="patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "attacking", "air", "enemy", "playerCheck", "floorCheck")]
 script = ExtResource("4_ib6mk")
 idle = NodePath("../idle")
+attacking = NodePath("../attacking")
+air = NodePath("../air")
 enemy = NodePath("../..")
+playerCheck = NodePath("../../FlipGroup/PlayerCheck")
+floorCheck = NodePath("../../FlipGroup/FloorCheck")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("patrol", "enemy")]
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("patrol", "attacking", "enemy")]
 script = ExtResource("5_kv2gn")
 patrol = NodePath("../patrol")
+attacking = NodePath("../attacking")
 enemy = NodePath("../..")
 
-[node name="attacking" type="Node" parent="StateMachine"]
+[node name="attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("air", "enemy", "playerCheck", "floorCheck", "currentItemManager")]
 script = ExtResource("6_akt4i")
+air = NodePath("../air")
+enemy = NodePath("../..")
+playerCheck = NodePath("../../FlipGroup/PlayerCheck")
+floorCheck = NodePath("../../FlipGroup/FloorCheck")
+currentItemManager = NodePath("../../FlipGroup/CurrentItem")
+
+[node name="air" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_4nisd")
+enemy = NodePath("../..")
