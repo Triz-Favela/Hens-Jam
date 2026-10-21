@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drp3f7nmhegep"
-path="res://.godot/imported/rayGun.png-635ad69da923f7750456338e9e8d9bbd.ctex"
+uid="uid://cxffljpli0wm"
+path="res://.godot/imported/alienGranade.png-0ac2132c48d54918794666584f02428c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rayGun/rayGun.png"
-dest_files=["res://.godot/imported/rayGun.png-635ad69da923f7750456338e9e8d9bbd.ctex"]
+source_file="res://assets/alienWeapons/alienGranade.png"
+dest_files=["res://.godot/imported/alienGranade.png-0ac2132c48d54918794666584f02428c.ctex"]
 
 [params]
 

@@ -1496,12 +1496,13 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3g8j1"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yx6m4"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vyd07"]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w1e3k"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ut82p"]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cr40p"]
 states/idle/node = SubResource("AnimationNodeAnimation_eeang")
@@ -1512,10 +1513,10 @@ states/landing/node = SubResource("AnimationNodeAnimation_xevvc")
 states/landing/position = Vector2(495, 155)
 states/running/node = SubResource("AnimationNodeAnimation_513fu")
 states/running/position = Vector2(535, 80)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_hr2cg"), "idle", "jumping", SubResource("AnimationNodeStateMachineTransition_japj2"), "idle", "running", SubResource("AnimationNodeStateMachineTransition_84fav"), "running", "idle", SubResource("AnimationNodeStateMachineTransition_081wf"), "running", "jumping", SubResource("AnimationNodeStateMachineTransition_3g8j1"), "jumping", "idle", SubResource("AnimationNodeStateMachineTransition_yx6m4"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_vyd07"), "jumping", "landing", SubResource("AnimationNodeStateMachineTransition_w1e3k")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_hr2cg"), "idle", "jumping", SubResource("AnimationNodeStateMachineTransition_japj2"), "idle", "running", SubResource("AnimationNodeStateMachineTransition_84fav"), "running", "idle", SubResource("AnimationNodeStateMachineTransition_081wf"), "running", "jumping", SubResource("AnimationNodeStateMachineTransition_3g8j1"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_vyd07"), "jumping", "landing", SubResource("AnimationNodeStateMachineTransition_w1e3k"), "landing", "running", SubResource("AnimationNodeStateMachineTransition_ut82p")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_40ad6"]
-graph_offset = Vector2(-474.829, -99.7976)
+graph_offset = Vector2(-660, -23)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_4a8no")
 nodes/Animation/position = Vector2(-480, 200)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_8gt5v")
@@ -1687,7 +1688,6 @@ secondaryWeapon = NodePath("RayGun")
 
 [node name="ChargeGun" parent="FlipGroup/CurrentItem" instance=ExtResource("5_5jbqt")]
 visible = false
-modulate = Color(1, 0, 1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)

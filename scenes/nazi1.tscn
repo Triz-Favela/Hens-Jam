@@ -1,0 +1,185 @@
+[gd_scene load_steps=8 format=3 uid="uid://dog0hampy0y2q"]
+
+[ext_resource type="Texture2D" uid="uid://dt5hn6ml5tmr3" path="res://assets/naziScum/naziScum1.png" id="1_ko4nx"]
+[ext_resource type="Script" path="res://scripts/enemies/nazi1.gd" id="1_yef0f"]
+[ext_resource type="Script" path="res://scripts/stateMachine/stateMachine.gd" id="3_jl7vl"]
+[ext_resource type="Script" path="res://scripts/enemies/stateMachine/patrol.gd" id="4_ib6mk"]
+[ext_resource type="Script" path="res://scripts/enemies/stateMachine/idle.gd" id="5_kv2gn"]
+[ext_resource type="Script" path="res://scripts/enemies/stateMachine/attacking.gd" id="6_akt4i"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_41j88"]
+radius = 16.0
+height = 92.0
+
+[node name="Nazi1" type="CharacterBody2D"]
+script = ExtResource("1_yef0f")
+
+[node name="FlipGroup" type="Node2D" parent="."]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="FlipGroup"]
+scale = Vector2(0.1, 0.1)
+
+[node name="UpperBodyBone" type="Bone2D" parent="FlipGroup/Skeleton2D"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="FArmBone" type="Bone2D" parent="FlipGroup/Skeleton2D/UpperBodyBone"]
+position = Vector2(100, -90)
+rest = Transform2D(1, 0, 0, 1, 100, -90)
+editor_settings/show_bone_gizmo = false
+
+[node name="FForearmBone" type="Bone2D" parent="FlipGroup/Skeleton2D/UpperBodyBone/FArmBone"]
+position = Vector2(30, 90)
+rest = Transform2D(1, 0, 0, 1, 30, 90)
+auto_calculate_length_and_angle = false
+length = 108.162
+bone_angle = 64.865
+editor_settings/show_bone_gizmo = false
+
+[node name="BArmBone" type="Bone2D" parent="FlipGroup/Skeleton2D/UpperBodyBone"]
+position = Vector2(-90, -80)
+rest = Transform2D(1, 0, 0, 1, -90, -80)
+editor_settings/show_bone_gizmo = false
+
+[node name="BForearmBone" type="Bone2D" parent="FlipGroup/Skeleton2D/UpperBodyBone/BArmBone"]
+position = Vector2(-40, 90)
+rest = Transform2D(1, 0, 0, 1, -40, 90)
+auto_calculate_length_and_angle = false
+length = 135.811
+bone_angle = 103.784
+editor_settings/show_bone_gizmo = false
+
+[node name="HeadBone" type="Bone2D" parent="FlipGroup/Skeleton2D/UpperBodyBone"]
+position = Vector2(-10, -220)
+rest = Transform2D(1, 0, 0, 1, -10, -220)
+auto_calculate_length_and_angle = false
+length = 117.378
+bone_angle = -103.784
+editor_settings/show_bone_gizmo = false
+
+[node name="LowerBodyBone" type="Bone2D" parent="FlipGroup/Skeleton2D"]
+rotation = -0.0492798
+scale = Vector2(1, 1)
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="FThighBone" type="Bone2D" parent="FlipGroup/Skeleton2D/LowerBodyBone"]
+position = Vector2(60, 110)
+rest = Transform2D(1, 0, 0, 1, 60, 110)
+editor_settings/show_bone_gizmo = false
+
+[node name="FShinBone" type="Bone2D" parent="FlipGroup/Skeleton2D/LowerBodyBone/FThighBone"]
+position = Vector2(10, 160)
+rest = Transform2D(1, 0, 0, 1, 10, 160)
+auto_calculate_length_and_angle = false
+length = 172.766
+bone_angle = 90.81
+editor_settings/show_bone_gizmo = false
+
+[node name="BThighBone" type="Bone2D" parent="FlipGroup/Skeleton2D/LowerBodyBone"]
+position = Vector2(-40, 100)
+rest = Transform2D(1, 0, 0, 1, -40, 100)
+editor_settings/show_bone_gizmo = false
+
+[node name="BShinBone" type="Bone2D" parent="FlipGroup/Skeleton2D/LowerBodyBone/BThighBone"]
+position = Vector2(-10, 170)
+rest = Transform2D(1, 0, 0, 1, -10, 170)
+auto_calculate_length_and_angle = false
+length = 181.892
+bone_angle = 97.297
+editor_settings/show_bone_gizmo = false
+
+[node name="BArmPoly" type="Polygon2D" parent="FlipGroup/Skeleton2D"]
+position = Vector2(-90, -80)
+rotation = 0.739708
+color = Color(0.393086, 0.393086, 0.393085, 1)
+offset = Vector2(-456.415, -182.2)
+texture = ExtResource("1_ko4nx")
+skeleton = NodePath("..")
+polygon = PackedVector2Array(412.464, 160.094, 485.239, 120.337, 539.82, 247.694, 539.82, 247.694, 614.617, 391.896, 541.168, 457.259, 459.633, 347.423, 446.83, 311.709, 432.679, 277.343)
+uv = PackedVector2Array(412.464, 160.094, 485.239, 120.337, 539.82, 247.694, 539.82, 247.694, 614.617, 391.896, 541.168, 457.259, 459.633, 347.423, 446.83, 311.709, 432.679, 277.343)
+polygons = [PackedInt32Array(0, 1, 2, 8), PackedInt32Array(2, 7, 8), PackedInt32Array(6, 7, 2), PackedInt32Array(6, 5, 4, 2)]
+bones = ["UpperBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone/FForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone", PackedFloat32Array(1, 1, 0.5, 0.5, 0, 0, 0, 0.5, 1), "UpperBodyBone/BArmBone/BForearmBone", PackedFloat32Array(0, 0, 0.5, 0.5, 1, 1, 1, 0.5, 0), "UpperBodyBone/HeadBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone/FShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone/BShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="BLegPoly" type="Polygon2D" parent="FlipGroup/Skeleton2D"]
+position = Vector2(-40, 110)
+rotation = 0.131205
+color = Color(0.458405, 0.458405, 0.458405, 1)
+offset = Vector2(-409.3, -437.54)
+texture = ExtResource("1_ko4nx")
+skeleton = NodePath("..")
+polygon = PackedVector2Array(365.722, 612.522, 362.762, 391.529, 463.393, 385.609, 463.393, 385.609, 486.084, 571.085, 489.044, 618.441, 489.044, 618.441, 490.03, 666.783, 493.976, 820.689, 339.084, 828.581)
+uv = PackedVector2Array(365.722, 612.522, 362.762, 391.529, 463.393, 385.609, 463.393, 385.609, 486.084, 571.085, 489.044, 618.441, 489.044, 618.441, 490.03, 666.783, 493.976, 820.689, 339.084, 828.581)
+polygons = [PackedInt32Array(0, 4, 2, 1), PackedInt32Array(5, 0, 4), PackedInt32Array(5, 7, 0), PackedInt32Array(8, 7, 0, 9)]
+bones = ["UpperBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone/FForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone/BForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/HeadBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone/FShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone", PackedFloat32Array(0.5, 1, 1, 1, 1, 0.5, 0.5, 0, 0, 0), "LowerBodyBone/BThighBone/BShinBone", PackedFloat32Array(0.5, 0, 0, 0, 0, 0.5, 0.5, 1, 1, 1)]
+
+[node name="FLegPoly" type="Polygon2D" parent="FlipGroup/Skeleton2D"]
+position = Vector2(60, 110)
+rotation = 0.0315196
+offset = Vector2(-409.3, -437.54)
+texture = ExtResource("1_ko4nx")
+skeleton = NodePath("..")
+polygon = PackedVector2Array(365.722, 612.522, 362.762, 391.529, 463.393, 385.609, 463.393, 385.609, 486.084, 571.085, 489.044, 618.441, 489.044, 618.441, 490.03, 666.783, 493.976, 820.689, 339.084, 828.581)
+uv = PackedVector2Array(365.722, 612.522, 362.762, 391.529, 463.393, 385.609, 463.393, 385.609, 486.084, 571.085, 489.044, 618.441, 489.044, 618.441, 490.03, 666.783, 493.976, 820.689, 339.084, 828.581)
+polygons = [PackedInt32Array(0, 4, 2, 1), PackedInt32Array(5, 0, 4), PackedInt32Array(5, 7, 0), PackedInt32Array(8, 7, 0, 9)]
+bones = ["UpperBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone/FForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone/BForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/HeadBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone", PackedFloat32Array(0.5, 1, 1, 1, 1, 0.5, 0.5, 0, 0, 0), "LowerBodyBone/FThighBone/FShinBone", PackedFloat32Array(0.5, 0, 0, 0, 0, 0.5, 0.5, 1, 1, 1), "LowerBodyBone/BThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone/BShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="BodyPoly" type="Polygon2D" parent="FlipGroup/Skeleton2D"]
+offset = Vector2(-252.51, -300)
+texture = ExtResource("1_ko4nx")
+skeleton = NodePath("..")
+polygon = PackedVector2Array(83.1774, 168.733, 189.422, 132.921, 193.003, 57.7139, 282.535, 57.7139, 304.022, 136.502, 407.879, 153.214, 378.035, 267.815, 368.485, 294.078, 362.516, 333.471, 361.322, 364.509, 362.516, 396.741, 361.322, 444.491, 169.128, 463.591, 155.996, 397.934, 153.609, 369.284, 146.446, 340.634, 146.446, 340.634, 139.284, 297.659)
+uv = PackedVector2Array(83.1774, 168.733, 189.422, 132.921, 193.003, 57.7139, 282.535, 57.7139, 304.022, 136.502, 407.879, 153.214, 378.035, 267.815, 368.485, 294.078, 362.516, 333.471, 361.322, 364.509, 362.516, 396.741, 361.322, 444.491, 169.128, 463.591, 155.996, 397.934, 153.609, 369.284, 146.446, 340.634, 146.446, 340.634, 139.284, 297.659)
+polygons = [PackedInt32Array(8, 15, 7), PackedInt32Array(14, 8, 15), PackedInt32Array(13, 9, 14), PackedInt32Array(9, 8, 14), PackedInt32Array(10, 9, 13), PackedInt32Array(11, 10, 13, 12), PackedInt32Array(15, 17, 7), PackedInt32Array(7, 6, 17), PackedInt32Array(17, 0, 1, 2, 3, 4, 5, 6)]
+bones = ["UpperBodyBone", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1), "UpperBodyBone/FArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone/FForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone/BForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/HeadBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0), "LowerBodyBone/FThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone/FShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone/BShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="HeadPoly" type="Polygon2D" parent="FlipGroup/Skeleton2D"]
+position = Vector2(-70, -240)
+offset = Vector2(-150, -642.415)
+texture = ExtResource("1_ko4nx")
+skeleton = NodePath("..")
+polygon = PackedVector2Array(47.0223, 551.471, 83.5256, 446.894, 318.33, 477.478, 335.102, 706.363, 128.908, 768.518, 26.3043, 684.659, 14.4654, 566.27)
+uv = PackedVector2Array(47.0223, 551.471, 83.5256, 446.894, 318.33, 477.478, 335.102, 706.363, 128.908, 768.518, 26.3043, 684.659, 14.4654, 566.27)
+bones = ["UpperBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone/FForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone/BForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/HeadBone", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1), "LowerBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone/FShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone/BShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)]
+
+[node name="FArmPoly" type="Polygon2D" parent="FlipGroup/Skeleton2D"]
+position = Vector2(100, -90)
+offset = Vector2(-456.415, -182.2)
+texture = ExtResource("1_ko4nx")
+skeleton = NodePath("..")
+polygon = PackedVector2Array(412.464, 160.094, 485.239, 120.337, 539.82, 247.694, 539.82, 247.694, 614.617, 391.896, 541.168, 457.259, 459.633, 347.423, 446.83, 311.709, 432.679, 277.343)
+uv = PackedVector2Array(412.464, 160.094, 485.239, 120.337, 539.82, 247.694, 539.82, 247.694, 614.617, 391.896, 541.168, 457.259, 459.633, 347.423, 446.83, 311.709, 432.679, 277.343)
+polygons = [PackedInt32Array(0, 1, 2, 8), PackedInt32Array(2, 7, 8), PackedInt32Array(6, 7, 2), PackedInt32Array(6, 5, 4, 2)]
+bones = ["UpperBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone", PackedFloat32Array(1, 1, 0.5, 0.5, 0, 0, 0, 0.5, 1), "UpperBodyBone/FArmBone/FForearmBone", PackedFloat32Array(0, 0, 0.5, 0.5, 1, 1, 1, 0.5, 0), "UpperBodyBone/BArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone/BForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/HeadBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/FThighBone/FShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "LowerBodyBone/BThighBone/BShinBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="PlayerCheck" type="Area2D" parent="FlipGroup"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlipGroup/PlayerCheck"]
+polygon = PackedVector2Array(-7, -23, -267, -49, -267, 42)
+
+[node name="FloorCheck" type="RayCast2D" parent="FlipGroup"]
+position = Vector2(-22, 39)
+target_position = Vector2(0, 13)
+
+[node name="CurrentItem" type="Node2D" parent="FlipGroup"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_41j88")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_jl7vl")
+initial_state = NodePath("patrol")
+
+[node name="patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "enemy")]
+script = ExtResource("4_ib6mk")
+idle = NodePath("../idle")
+enemy = NodePath("../..")
+
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("patrol", "enemy")]
+script = ExtResource("5_kv2gn")
+patrol = NodePath("../patrol")
+enemy = NodePath("../..")
+
+[node name="attacking" type="Node" parent="StateMachine"]
+script = ExtResource("6_akt4i")

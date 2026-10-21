@@ -1,14 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8lgmnodu85tm"]
 
 [ext_resource type="Script" path="res://scripts/items/weapons/primaryWeapons/chargeGun.gd" id="1_aemxu"]
-[ext_resource type="Texture2D" uid="uid://drp3f7nmhegep" path="res://assets/rayGun/rayGun.png" id="2_18h7r"]
+[ext_resource type="Texture2D" uid="uid://bk3o17ef6tt1c" path="res://assets/alienWeapons/chunkyGun.png" id="2_agolb"]
 
 [node name="ChargeGun" type="Node2D"]
+position = Vector2(2, 1)
 script = ExtResource("1_aemxu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_18h7r")
+position = Vector2(0, 3)
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("2_agolb")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(11, -1)
+position = Vector2(18, 0)

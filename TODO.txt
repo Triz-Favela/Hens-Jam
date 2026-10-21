@@ -1,0 +1,26 @@
+Coisas que ainda tenho que fazer
+
+[ ] StateMachine dos inimigos:
+	[X] Idle
+	[ ] Attacking
+	[ ] Air
+[ ] Arte de cenário
+[ ] Armas:
+	[ ] Dano das armas
+	[ ] Sistema de munição
+	[ ] Sistema de dropar/pegar arma
+	[ ] Lasersão
+	[ ] Metralhadora
+	[ ] 12
+	[ ] Lança granada
+[ ] Mudar movimentação do player
+[ ] UI
+[ ] Animações do alien:
+	[ ] Jetpacking
+	[ ] Damage
+[ ] SaveSystem
+[ ] Checkpoints
+[ ] Menu principal
+[ ] Tutorial
+[ ] Cena inicial
+[ ] Cenário destrutivo(?)
