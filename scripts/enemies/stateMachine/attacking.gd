@@ -19,6 +19,9 @@ func process_physics(delta: float) -> State:
 	if !enemy.is_on_floor():
 		return air
 	
+	if !enemy.playerSeen:
+		return null
+	
 	currentItemManager.look_at(player.global_position)
 	
 	
