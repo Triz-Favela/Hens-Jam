@@ -3,7 +3,7 @@ class_name CurrentItemManagerEnemy
 
 @export var enemy: Nazi1
 @export var animationTree: AnimationTree
-@onready var animStateMachine: AnimationNodeStateMachinePlayback = animationTree.get("parameters/StateMachine/playback")
+#@onready var animStateMachine: AnimationNodeStateMachinePlayback = animationTree.get("parameters/StateMachine/playback")
 const BLEND_PATH = "parameters/Blend2/blend_amount"
 
 @export var primaryWeapon: PrimaryWeapon
@@ -22,6 +22,17 @@ func changeItem(index: int) -> void:
 	currentWeaponIndex = index
 	setCurrentWeapon()
 
+func click() -> void:
+	if currentWeapon:
+		currentWeapon.click()
+
+func releaseClicking() -> void:
+	if currentWeapon:
+		currentWeapon.releaseClick()
+
+func throwWeapon() -> void:
+	if currentWeapon:
+		currentWeapon.call_deferred("reparent", get_tree().current_scene)
 
 func _input(event: InputEvent) -> void:
 	#if !currentWeapon:
@@ -30,7 +41,6 @@ func _input(event: InputEvent) -> void:
 		#lastBlendAmount = 0
 		#return
 	
-	#
 	#if lastBlendAmount != 1:
 		#animationTree.set(BLEND_PATH, 1)
 	#
@@ -51,4 +61,4 @@ func setCurrentWeapon():
 	
 	if currentWeapon:
 		currentWeapon.visible = true
-		currentWeapon.flipped = player.flipped
+		currentWeapon.flipped = enemy.flipped

@@ -3,7 +3,7 @@ Coisas que ainda tenho que fazer
 [ ] StateMachine dos inimigos:
 	[X] Idle
 	[ ] Attacking
-	[ ] Air
+	[X] Air
 [ ] Arte de cenário
 [ ] Armas:
 	[ ] Dano das armas

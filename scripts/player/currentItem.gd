@@ -41,7 +41,6 @@ func _input(event: InputEvent) -> void:
 	
 	lastBlendAmount = 1
 	
-	currentWeapon.flipped = player.flipped
 	
 	if event.is_action_pressed("SHOOT"):
 		currentWeapon.click()

@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkl1o7fvqqxv4"]
+[gd_scene load_steps=4 format=3 uid="uid://bkl1o7fvqqxv4"]
 
 [ext_resource type="Script" path="res://scripts/items/weapons/secondaryWeapon/rayGun.gd" id="1_n05v6"]
 [ext_resource type="Texture2D" uid="uid://drp3f7nmhegep" path="res://assets/alienWeapons/rayGun.png" id="2_sg00e"]
 
-[node name="RayGun" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlwca"]
+radius = 4.0
+height = 18.0
+
+[node name="RayGun" type="CharacterBody2D"]
 script = ExtResource("1_n05v6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -12,3 +16,8 @@ texture = ExtResource("2_sg00e")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(11, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qlwca")

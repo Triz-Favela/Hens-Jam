@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://xkw4tf2v37b6"]
+[gd_scene load_steps=35 format=3 uid="uid://8t8axdlox7m7"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_t50dn"]
 [ext_resource type="Texture2D" uid="uid://v68rydc5j2ks" path="res://assets/alien/alien.png" id="2_gu6ht"]
@@ -6,10 +6,10 @@
 [ext_resource type="Script" path="res://scripts/player/stateMachine/states/ground.gd" id="3_e1eet"]
 [ext_resource type="Script" path="res://scripts/player/stateMachine/states/air.gd" id="4_lqcg6"]
 [ext_resource type="PackedScene" uid="uid://b8lgmnodu85tm" path="res://scenes/weapons/chargeGun.tscn" id="5_5jbqt"]
-[ext_resource type="Script" path="res://scenes/jetpacking.gd" id="5_6q6j4"]
 [ext_resource type="Script" path="res://scripts/player/jetpack.gd" id="6_y2pwr"]
 [ext_resource type="Script" path="res://scripts/player/currentItem.gd" id="7_dbx2t"]
 [ext_resource type="PackedScene" uid="uid://bkl1o7fvqqxv4" path="res://scenes/weapons/rayGun.tscn" id="9_bejg8"]
+[ext_resource type="Script" path="res://scripts/player/stateMachine/states/jetpacking.gd" id="9_p5o4e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dvc43"]
 radius = 6.0
@@ -1678,7 +1678,7 @@ polygons = [PackedInt32Array(8, 2, 1, 0), PackedInt32Array(8, 3, 2), PackedInt32
 bones = ["UpperBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone", PackedFloat32Array(1, 1, 1, 0.5, 0, 0, 0, 0, 0.5), "UpperBodyBone/FArmBone/FForearmBone", PackedFloat32Array(0, 0, 0, 0.5, 1, 1, 1, 1, 0.5), "UpperBodyBone/BArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone/BForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="CurrentItem" type="Node2D" parent="FlipGroup" node_paths=PackedStringArray("primaryWeapon", "secondaryWeapon")]
-position = Vector2(7.99997, -2.99999)
+position = Vector2(7.99997, -1.99999)
 scale = Vector2(0.999997, 0.999997)
 script = ExtResource("7_dbx2t")
 primaryWeapon = NodePath("ChargeGun")
@@ -1708,7 +1708,7 @@ ground = NodePath("../ground")
 jetpacking = NodePath("../jetpacking")
 
 [node name="jetpacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("air", "ground")]
-script = ExtResource("5_6q6j4")
+script = ExtResource("9_p5o4e")
 air = NodePath("../air")
 ground = NodePath("../ground")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dog0hampy0y2q"]
+[gd_scene load_steps=11 format=3 uid="uid://bbiyqsfaitxd1"]
 
 [ext_resource type="Texture2D" uid="uid://dt5hn6ml5tmr3" path="res://assets/naziScum/naziScum1.png" id="1_ko4nx"]
 [ext_resource type="Script" path="res://scripts/enemies/nazi1.gd" id="1_yef0f"]
@@ -9,11 +9,16 @@
 [ext_resource type="Script" path="res://scripts/enemies/stateMachine/attacking.gd" id="6_akt4i"]
 [ext_resource type="Script" path="res://scripts/enemies/stateMachine/air.gd" id="7_4nisd"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cr1ga"]
+size = Vector2(190, 80)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_41j88"]
 radius = 16.0
 height = 92.0
 
 [node name="Nazi1" type="CharacterBody2D" node_paths=PackedStringArray("flipGroup", "playerCheck")]
+collision_layer = 2
+collision_mask = 16
 script = ExtResource("1_yef0f")
 flipGroup = NodePath("FlipGroup")
 playerCheck = NodePath("FlipGroup/PlayerCheck")
@@ -39,6 +44,9 @@ auto_calculate_length_and_angle = false
 length = 108.162
 bone_angle = 64.865
 editor_settings/show_bone_gizmo = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="FlipGroup/Skeleton2D/UpperBodyBone/FArmBone/FForearmBone"]
+remote_path = NodePath("../../../../../CurrentItem")
 
 [node name="BArmBone" type="Bone2D" parent="FlipGroup/Skeleton2D/UpperBodyBone"]
 position = Vector2(-90, -80)
@@ -158,8 +166,9 @@ bones = ["UpperBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperB
 
 [node name="PlayerCheck" type="Area2D" parent="FlipGroup"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlipGroup/PlayerCheck"]
-polygon = PackedVector2Array(-7, -23, -267, -49, -267, 42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipGroup/PlayerCheck"]
+position = Vector2(-105, 4)
+shape = SubResource("RectangleShape2D_cr1ga")
 
 [node name="FloorCheck" type="RayCast2D" parent="FlipGroup"]
 position = Vector2(-22, 39)
@@ -167,6 +176,8 @@ target_position = Vector2(0, 13)
 collision_mask = 16
 
 [node name="CurrentItem" type="Node2D" parent="FlipGroup" node_paths=PackedStringArray("enemy")]
+position = Vector2(13, 0)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("3_uw0ts")
 enemy = NodePath("../..")
 

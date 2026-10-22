@@ -10,6 +10,7 @@ func enter() -> void:
 	pass
 
 func process_frame(delta: float) -> State:
+	
 	return null
 
 func process_physics(delta: float) -> State:
@@ -18,6 +19,7 @@ func process_physics(delta: float) -> State:
 	if !enemy.is_on_floor():
 		return air
 	
+	currentItemManager.look_at(player.global_position)
 	
 	
 	return null
