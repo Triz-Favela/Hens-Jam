@@ -1678,7 +1678,7 @@ polygons = [PackedInt32Array(8, 2, 1, 0), PackedInt32Array(8, 3, 2), PackedInt32
 bones = ["UpperBodyBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/FArmBone", PackedFloat32Array(1, 1, 1, 0.5, 0, 0, 0, 0, 0.5), "UpperBodyBone/FArmBone/FForearmBone", PackedFloat32Array(0, 0, 0, 0.5, 1, 1, 1, 1, 0.5), "UpperBodyBone/BArmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "UpperBodyBone/BArmBone/BForearmBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="CurrentItem" type="Node2D" parent="FlipGroup" node_paths=PackedStringArray("primaryWeapon", "secondaryWeapon")]
-position = Vector2(7.99997, -2.99999)
+position = Vector2(7.99997, -1.99999)
 scale = Vector2(0.999997, 0.999997)
 script = ExtResource("7_dbx2t")
 primaryWeapon = NodePath("ChargeGun")

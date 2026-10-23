@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b03jqee7aasye"]
+[gd_scene load_steps=16 format=4 uid="uid://b03jqee7aasye"]
 
 [ext_resource type="Texture2D" uid="uid://cmjah4kbj5kr4" path="res://assets/enviromnent/chimney.png" id="1_0j43w"]
 [ext_resource type="PackedScene" uid="uid://8t8axdlox7m7" path="res://scenes/player.tscn" id="1_jvq7l"]
@@ -8,9 +8,56 @@
 [ext_resource type="Texture2D" uid="uid://bar6nmfh73lp6" path="res://assets/enviromnent/construction.png" id="5_3eu2h"]
 [ext_resource type="Texture2D" uid="uid://c6iwl0512v62w" path="res://assets/enviromnent/ashes.png" id="5_wb0p6"]
 [ext_resource type="Texture2D" uid="uid://wfbvmst1ncqj" path="res://assets/enviromnent/tower.png" id="6_expqo"]
+[ext_resource type="Texture2D" uid="uid://d4hjv3sjo42sb" path="res://assets/enviromnent/concreteTile2.png" id="9_1566e"]
+[ext_resource type="TileSet" uid="uid://bwskm66royo1" path="res://assets/enviromnent/TerrainMaterials/Grass.tres" id="9_ojqb8"]
+[ext_resource type="Texture2D" uid="uid://roc11uj6x268" path="res://assets/enviromnent/concreteTile1.png" id="10_adeut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ttg72"]
 size = Vector2(128, 129)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xc3md"]
+texture = ExtResource("9_1566e")
+texture_region_size = Vector2i(400, 400)
+use_texture_padding = false
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-200, -200, 200, -200, 200, 200, -200, 200)
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x0mm2"]
+texture = ExtResource("10_adeut")
+texture_region_size = Vector2i(400, 400)
+use_texture_padding = false
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-200, -200, 200, -200, 200, 200, -200, 200)
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
+
+[sub_resource type="TileSet" id="TileSet_ot8j4"]
+tile_size = Vector2i(400, 400)
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 0
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Concrete"
+terrain_set_0/terrain_0/color = Color(0.51, 0.51, 0.51, 1)
+sources/0 = SubResource("TileSetAtlasSource_xc3md")
+sources/1 = SubResource("TileSetAtlasSource_x0mm2")
 
 [node name="Tutorial" type="Node2D"]
 
@@ -27,19 +74,6 @@ position = Vector2(293, 325)
 [node name="Nazi3" parent="." instance=ExtResource("2_dadso")]
 position = Vector2(628, 245)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(513, 617)
-scale = Vector2(6.44, 1)
-collision_layer = 16
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("3_ypq1k")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_ttg72")
-
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(285, 443)
 scale = Vector2(-0.399998, 1)
@@ -54,9 +88,11 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_ttg72")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_offset = Vector2(0, -100)
 script = ExtResource("4_lv4ld")
 
 [node name="Ashes1" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.492237, 0.492237, 0.492237, 1)
 motion_scale = Vector2(0.6, 0.9)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Ashes1"]
@@ -75,17 +111,20 @@ metadata/_edit_use_anchors_ = true
 motion_scale = Vector2(0.6, 0.9)
 
 [node name="Tower" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+modulate = Color(0.419813, 0.419813, 0.419813, 1)
 position = Vector2(419, 470)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("6_expqo")
 
 [node name="Tower2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+modulate = Color(0.419813, 0.419813, 0.419813, 1)
 position = Vector2(704, 470)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("6_expqo")
 flip_h = true
 
 [node name="Tower3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+modulate = Color(0.419813, 0.419813, 0.419813, 1)
 position = Vector2(1028, 470)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("6_expqo")
@@ -95,22 +134,26 @@ flip_h = true
 motion_scale = Vector2(0.7, 0.9)
 
 [node name="Construction" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2(726, 464)
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
+position = Vector2(725, 475)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_3eu2h")
 
 [node name="Chimney" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
 position = Vector2(544, 492)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_0j43w")
 
 [node name="Chimney2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
 position = Vector2(496, 499)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_0j43w")
 flip_h = true
 
 [node name="Ashes2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.492237, 0.492237, 0.492237, 1)
 motion_scale = Vector2(0.6, 0.9)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Ashes2"]
@@ -129,3 +172,18 @@ position = Vector2(8, 257)
 scale = Vector2(0.1, 0.1)
 color = Color(0.356863, 0.356863, 0.356863, 1)
 polygon = PackedVector2Array(-40, 160, -60, -1840, 8120, -1860, 8080, 130)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+modulate = Color(0.314316, 0.314316, 0.314316, 1)
+z_index = -1
+scale = Vector2(0.1, 0.1)
+tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAAYAA8AAAAAAAAAAAAYAA4AAAAAAAAAAAAYAA0AAQAAAAAAAAAZAA0AAQAAAAAAAAAaAA0AAQAAAAAAAAAbAA0AAQAAAAAAAAAbAA4AAAAAAAAAAAAcAA4AAQAAAAAAAAAcAA8AAQAAAAAAAAAbAA8AAAAAAAAAAAAaAA8AAQAAAAAAAAAZAA8AAAAAAAAAAAAZAA4AAQAAAAAAAAAaAA4AAAAAAAAAAAAaABAAAAAAAAAAAAAZABAAAQAAAAAAAAAcAA0AAQAAAAAAAAAdAA0AAQAAAAAAAAAdAA4AAAAAAAAAAAAdAA8AAAAAAAAAAAAcABAAAAAAAAAAAAAbABAAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_ot8j4")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+modulate = Color(0.647395, 0.647395, 0.647395, 1)
+z_index = -1
+position = Vector2(0, -5)
+scale = Vector2(0.2, 0.2)
+tile_map_data = PackedByteArray("AAAGABAAAQAAAAIAAAAHAA8AAQABAAEAAAAIAA8AAQABAAEAAAAJAA8AAQABAAEAAAAKAA8AAQABAAEAAAALAA8AAQABAAEAAAAMAA8AAQABAAEAAAANAA8AAQABAAEAAAAOAA8AAQABAAEAAAAPAA8AAQABAAEAAAAQAA8AAQABAAEAAAAQABAAAQABAAIAAAAPABAAAQABAAIAAAAOABAAAQABAAIAAAANABAAAQABAAIAAAAMABAAAQABAAIAAAALABAAAQABAAIAAAAKABAAAQABAAIAAAAJABAAAQABAAIAAAAIABAAAQABAAIAAAAHABAAAQABAAIAAAAGAA8AAQAAAAEAAAAGAA4AAQAAAAAAAAAHAA4AAQABAAAAAAAIAA4AAQABAAAAAAAJAA4AAQABAAAAAAAKAA4AAQABAAAAAAALAA4AAQABAAAAAAAMAA4AAQABAAAAAAANAA4AAQABAAAAAAAOAA4AAQABAAAAAAAPAA4AAQABAAAAAAAQAA4AAQABAAAAAAARAA4AAQABAAAAAAASAA4AAQABAAAAAAATAA4AAQABAAAAAAAUAA4AAQABAAAAAAAUAA8AAQABAAEAAAAVAA8AAQABAAEAAAAWAA8AAQABAAEAAAAWABAAAQABAAIAAAAXABAAAQABAAIAAAAXAA8AAQABAAEAAAATAA8AAQABAAEAAAASAA8AAQABAAEAAAARAA8AAQABAAEAAAASABAAAQABAAIAAAATABAAAQABAAIAAAAUABAAAQABAAIAAAAVABAAAQABAAIAAAARABAAAQABAAIAAAAWAA4AAQABAAAAAAAVAA4AAQABAAAAAAAXAA4AAQABAAAAAAAYAA4AAQABAAAAAAAZAA4AAQACAAAAAAAYAA8AAQABAAEAAAAZAA8AAQACAAEAAAAYABAAAQABAAIAAAAZABAAAQACAAIAAAA=")
+tile_set = ExtResource("9_ojqb8")

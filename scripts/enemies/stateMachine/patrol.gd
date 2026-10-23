@@ -9,6 +9,7 @@ extends EnemyState
 var patrolTimer: float = 5.0
 
 func enter() -> void:
+	animStateMachine.travel("walking")
 	enemy.direction = -enemy.direction
 	patrolTimer = randf_range(4, 6)
 	enemy.velocity.x = enemy.direction * enemy.MAX_RUN_SPEED/4

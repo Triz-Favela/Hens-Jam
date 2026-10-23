@@ -7,6 +7,7 @@ extends EnemyState
 var idleTimer: float = 5
 
 func enter() -> void:
+	animStateMachine.travel("idle")
 	enemy.velocity.x = 0
 	idleTimer = randf_range(6, 8)
 
